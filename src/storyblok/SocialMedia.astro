@@ -6,7 +6,7 @@ const { blok } = Astro.props
 ---
 
 <li class="social-media" {...storyblokEditable(blok)}>
-    <a href={blok.link}>
+    <a href={blok.link} aria-label={blok.label}>
         <Icon pack="ph" name={blok.icon} />
     </a>
 </li>
