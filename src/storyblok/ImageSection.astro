@@ -1,0 +1,109 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+
+const { blok } = Astro.props
+const content = renderRichText(blok.content)
+---
+
+<section id={blok.id} {...storyblokEditable(blok)}>
+    <div class="left-col">
+        <img src={blok.image.filename} alt={blok.image.alt}>
+    </div>
+    <div class="right-col">
+        <h2>{blok.title}</h2>
+        <h3>{blok.subtitle}</h3>
+        <Fragment set:html={content} />
+    </div>
+</section>
+
+<style lang="scss">
+    section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 50px;
+        padding: 130px 90px;
+
+        color: $primary-text;
+
+        @include media("<desktop") {
+            grid-template-columns: 1fr;
+            padding: 0;
+            padding-inline: 10vw;
+            margin-top: 90px;
+
+            &:has(+ .callout) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    h2 {
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-size: 1.375rem;
+        margin-bottom: 3.125rem;
+
+        @include media("<desktop") {
+            font-size: 1.2rem;
+        }
+    }
+
+    h3 {
+        font-family: $title;
+        font-size: 3rem;
+        line-height: 1;
+        margin-bottom: 3.125rem;
+
+        @include media("<desktop") {
+            font-size: 2.5rem;
+        }
+    }
+
+    .left-col {
+        display: grid;
+        justify-content: right;
+    }
+
+    img {
+        filter: saturate(1.2);
+        width: calc(100% + 90px);
+        margin-left: -90px;
+        max-width: none;
+        aspect-ratio: 1.43;
+        object-fit: cover;
+
+        @include media("<desktop") {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    #artista img {
+        aspect-ratio: 0;
+        width: auto;
+        margin: 0;
+        max-height: 100svh;
+        max-width: 100%;
+    }
+
+    .right-col {
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: -130px;
+            right: -90px;
+            background: $primary-bg;
+            width: calc(100% + 90px + 20vw);
+            height: calc(100% + 260px);
+            z-index: -1;
+
+            @include media("<desktop") {
+                width: calc(100% + 20vw);
+                left: -10vw;
+                top: -220px;
+            }
+        }
+    }
+</style>

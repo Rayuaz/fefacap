@@ -1,0 +1,76 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+
+const { blok } = Astro.props
+const leftColContent = renderRichText(blok.left_col)
+const rightColContent = renderRichText(blok.right_col)
+---
+
+<section id={blok.id} class="two-column-text" {...storyblokEditable(blok)}>
+    <h2>{blok.title}</h2>
+    <div class="content-wrapper">
+        <div class="left-col">
+            <Fragment set:html={leftColContent} />
+        </div>
+        <div class="right-col">
+            <Fragment set:html={rightColContent} />
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    section {
+        background: $primary-bg;
+        padding: 40px 90px 130px;
+        color: $primary-text;
+        position: relative;
+
+        @include media("<desktop") {
+            padding-inline: 10vw;
+            padding-bottom: 40px;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -30dvh;
+            z-index: -1;
+            height: 30dvh;
+            width: 100%;
+            background: $primary-bg;;
+        }
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        text-transform: uppercase;
+        text-align: center;
+
+        margin-bottom: 90px;
+
+        color: #808080;
+
+        @include media("<desktop") {
+            margin-bottom: 45px;
+        }
+    }
+
+    .content-wrapper {
+        display: flex;
+        gap: 50px;
+
+        @include media("<desktop") {
+            display: block;
+        }
+    }
+
+    .left-col {
+        text-align: right;
+
+        @include media("<desktop") {
+            text-align: left;
+            margin-bottom: 45px;
+        }
+    }
+</style>

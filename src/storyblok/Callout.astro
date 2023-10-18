@@ -1,0 +1,101 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+
+const { blok } = Astro.props
+const content = renderRichText(blok.content)
+---
+
+<section id={blok.id} class="callout" {...storyblokEditable(blok)}>
+    {blok.title && (
+        <div class="title">
+            <h2>{blok.title}</h2>
+        </div>
+    )}
+    <div class="content">
+        <Fragment set:html={content} />
+    </div>
+</section>
+
+<style lang="scss" is:global>
+
+    .callout {
+        background: $secondary-bg;
+        padding: 130px 90px;
+        display: flex;
+        gap: 50px;
+        color: $secondary-text;
+        justify-content: center;
+
+        @include media("<desktop") {
+            display: block;
+            padding: 90px 10vw;
+        }
+
+        .title {
+            flex: 0 0 50%;
+            display: flex;
+            justify-content: flex-end;
+
+            @include media("<desktop") {
+                justify-content: center;
+            }
+        }
+
+        h2 {
+            text-align: right;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            font-weight: 400;
+            max-width: 20ch;
+            line-height: 1.2;
+
+            @include media("<desktop") {
+                text-align: left;
+                font-size: 1.8rem;
+                max-width: 100%;
+                margin-bottom: 1em;
+            }
+        }
+
+        &:has(.title) .content {
+            flex: 0 0 50%;
+        }
+
+        .content {
+            font-weight: 700;
+            text-transform: uppercase;
+
+            @include media("<desktop") {
+                font-size: 1rem;
+            }
+            
+            p {
+                letter-spacing: .2em;
+                max-width: 37ch;
+
+                &:has(a:first-child, a:last-child) {
+                    max-width: 100%;
+                    @include media("<desktop") {
+                        text-align: center;
+                    }
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            a {
+                color: $accent;
+                transition: all .15s;
+
+                &:hover {
+                    opacity: .7;
+                }
+            }
+        }
+    }
+
+    
+
+</style>

@@ -1,0 +1,97 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+
+import SocialMedia from './SocialMedia.astro'
+
+const { blok } = Astro.props
+
+const content = renderRichText(blok.text)
+---
+
+<footer id={blok.id} {...storyblokEditable(blok)}>
+    <img src={blok.logo.filename} alt={blok.logo.alt ? blok.logo.alt : ""}>
+    <div class="text">
+        <Fragment set:html={content} />
+    </div>
+    {blok.social_media_title && (
+        <h2>{blok.social_media_title}</h2>
+    )}
+    {blok.social_media_links && (
+        <ul class="social-media-items">
+            {blok.social_media_links.map((socialMediaItem) => (
+                <SocialMedia blok={socialMediaItem} />
+            ))}
+        </ul>
+    )}
+</footer>
+
+<style lang="scss" is:global>
+    footer {
+        background: $primary-bg;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 130px 90px;
+        text-align: center;
+        color: $primary-text;
+
+        @include media("<desktop") {
+            padding: 90px 10vw;
+        }
+
+        img {
+            width: 330px;
+            margin-bottom: -50px;
+
+            @include media("<desktop") {
+                width: 250px;
+                margin-bottom: -40px;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .text {
+            margin-bottom: 2rem;
+
+            @include media("<desktop") {
+                font-size: 1rem;
+            }
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.375rem;
+            letter-spacing: .15em;
+
+            @include media("<desktop") {
+                font-size: 1rem;
+            }
+        }
+
+        .social-media-items {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            gap: .5rem;
+            margin-top: 1rem;
+
+            svg {
+                width: 2.5rem;
+
+                @include media("<desktop") {
+                    width: 2.3rem;
+                }
+            }
+
+            a:after {
+                background: $primary-text;
+            }
+        }
+    }
+
+    
+</style>

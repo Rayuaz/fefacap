@@ -1,0 +1,38 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+const { blok } = Astro.props
+---
+
+<li class="menu-item" {...storyblokEditable(blok)}>
+    <a href={blok.link}>{blok.label}</a>
+</li>
+
+<style lang="scss">
+    a {
+        text-decoration: none;
+        font-weight: 800;
+
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+
+            width: 0;
+            height: 3px;
+
+            background: $secondary-text;
+            opacity: 0;
+
+            transition: all .15s;
+        }
+
+        &:hover:after {
+            opacity: 1;
+            width: 2ch;
+        }
+    }
+</style>

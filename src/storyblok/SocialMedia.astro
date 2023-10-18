@@ -1,0 +1,47 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { Icon } from 'astro-icon'
+
+const { blok } = Astro.props
+---
+
+<li class="social-media" {...storyblokEditable(blok)}>
+    <a href={blok.link}>
+        <Icon pack="ph" name={blok.icon} />
+    </a>
+</li>
+
+<style lang="scss">
+
+    a {
+        display: flex;
+        align-items: center;
+        transition: all .15s;
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+
+            width: 0;
+            height: 3px;
+
+            background: $secondary-text;
+            opacity: 0;
+
+            transition: all .15s;
+        }
+
+        &:hover:after {
+            opacity: 1;
+            width: 100%;
+        }
+    }
+
+    svg {
+        width: 1.2em;
+    }
+
+</style>

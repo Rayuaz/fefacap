@@ -1,0 +1,80 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+import BeforeAfterImage from './BeforeAfterImage.astro'
+
+const { blok } = Astro.props
+---
+
+<section id={blok.id} {...storyblokEditable(blok)}>
+    <h2>{blok.title}</h2>
+    <p>{blok.subtitle}</p>
+    <div class="images-container">
+        {blok.images.map((image) => (
+            <BeforeAfterImage blok={image} />
+        ))}
+    </div>
+</section>
+
+<style lang="scss">
+    section {
+        text-align: center;
+        margin-top: 130px;
+        color: $primary-text;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        max-width: 30ch;
+        margin-inline: auto;
+        line-height: 1;
+        margin-bottom: 1rem;
+
+        @include media("<desktop") {
+            font-size: 2rem;
+        }
+    }
+
+    p {
+        font-size: 3rem;
+        font-family: $title;
+        max-width: 30ch;
+        margin-inline: auto;
+        line-height: 1;
+
+        @include media("<desktop") {
+            font-size: 2.5rem;
+        }
+    }
+
+    .images-container {
+        display: flex;
+        gap: 30px;
+
+        padding-inline: 30px;
+        padding-bottom: 10px;
+
+        max-width: 100%;
+        overflow-x: auto;
+
+        
+        /* width */
+            &::-webkit-scrollbar {
+            height: 15px;
+            
+        }
+
+        /* Track */
+            &::-webkit-scrollbar-track {
+            border-radius: 40px;
+        }
+
+        /* Handle */
+            &::-webkit-scrollbar-thumb {
+            background: rgb(179, 161, 108);
+            border-radius: 10px;
+        }
+    }
+</style>

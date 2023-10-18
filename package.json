@@ -1,15 +1,20 @@
 {
-  "name": "fefacap",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^3.3.0"
-  }
+    "name": "fefacap",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "dev:host": "astro dev --host",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@storyblok/astro": "^3.0.1",
+        "astro": "^3.3.0",
+        "astro-icon": "^0.8.1",
+        "sass": "^1.69.3",
+        "vite": "^4.4.11"
+    }
 }

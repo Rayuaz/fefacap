@@ -1,0 +1,17 @@
+@import "breakpoints";
+@import "fonts";
+
+$maxWidth: 1920px;
+
+$primary-text: #7d5e25;
+$secondary-text: #fff;
+$accent: #f56b60;
+$primary-bg: #ecead9;
+$secondary-bg: #111212;
+
+$title: "EB Garamond", serif;
+$text: "Montserrat", sans-serif;
+
+$breakpoints: (
+    "desktop": 1280px,
+);

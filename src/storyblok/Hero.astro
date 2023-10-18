@@ -1,0 +1,64 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+const { blok } = Astro.props
+---
+
+<header style={`--image-url:url(${blok.image.filename})`} {...storyblokEditable(blok)}>
+    <h1>{blok.title}</h1>
+    <p>{blok.subtitle}</p>
+</header>
+
+<style lang="scss">
+
+    header {
+        background-image: var(--image-url);
+        background-size: cover;
+        min-height: 100svh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        color: $secondary-text;
+        text-align: center;
+
+        filter: saturate(1.3);
+
+        @include media("<desktop") {
+            background-position: center;
+        }
+    }
+
+    h1 {
+        font-size: 3.75rem;
+        text-transform: uppercase;
+        max-width: 30ch;
+        font-weight: 400;
+        line-height: 1;
+
+        text-shadow: 3px 3px 10px rgba(0,0,0,.4);
+
+        @include media("<desktop") {
+            font-size: 1.9rem;
+            max-width: none;
+        }
+    }
+
+    p {
+        font-family: $title;
+        font-size: 3.75rem;
+        line-height: 1;
+        font-weight: 300;
+
+        max-width: 20ch;
+
+        text-shadow: 3px 3px 10px rgba(0,0,0,.4);
+
+        @include media("<desktop") {
+            font-size: 1.9rem;
+        }
+    }
+
+</style>

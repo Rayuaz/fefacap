@@ -1,0 +1,15 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { Icon } from 'astro-icon'
+
+const { blok } = Astro.props
+---
+
+<img class="image-before" src={blok.before.filename} alt={blok.before.alt}>
+<img class="image-after" src={blok.after.filename} alt={blok.after.alt}>
+
+<style lang="scss">
+    img {
+        max-height: 50dvh;
+    }
+</style>

@@ -1,0 +1,85 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+import MenuItem from './MenuItem.astro'
+import SocialMedia from './SocialMedia.astro'
+
+const { blok } = Astro.props
+---
+
+<nav {...storyblokEditable(blok)}>
+    <img src={blok.logo.filename} alt={blok.logo.alt}>
+    <ul class="menu-items">
+        {blok.menu.map((menuItem) => (
+            <MenuItem blok={menuItem} />
+        ))}
+    </ul>
+    <ul class="social-media-items">
+        {blok.social_media.map((socialMediaItem) => (
+            <SocialMedia blok={socialMediaItem} />
+        ))}
+    </ul>
+</nav>
+
+<style lang="scss">
+    nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        padding-inline: 90px;
+
+        font-size: 1.375rem;
+
+        z-index: 99;
+
+        @include media("<desktop") {
+            display: block;
+            padding-inline: 10vw;
+            margin-top: 30px;
+        }
+    }
+
+    img {
+        max-width: 350px;
+
+        @include media("<desktop") {
+            max-width: 70%;
+            margin-inline: auto;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        color: $secondary-text;
+    }
+
+    .menu-items {
+        flex: 1;
+        justify-content: center;
+        gap: 40px;
+
+        @include media("<desktop") {
+            display: none;
+        }
+    }
+
+    .social-media-items {
+        gap: .5em;
+
+        @include media("<desktop") {
+            display: none;
+        }
+    }
+
+    
+</style>

@@ -1,0 +1,51 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+const { blok } = Astro.props
+---
+
+<li class="feature" {...storyblokEditable(blok)}>
+    <p class="title"><strong>{blok.title}</strong></p>
+    <p class="text">{blok.text}</p>
+</li>
+
+<style lang="scss">
+    li {
+        list-style: none;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: calc(50% - 1.5ch);
+            top: -1rem;
+            width: 3ch;
+            height: 3px;
+            background: $secondary-text;
+            display: block;
+        }
+    }
+
+    .title {
+        text-transform: uppercase;
+        margin-bottom: 0;
+        text-shadow: 2px 2px 10px rgba(0,0,0,.3);
+        letter-spacing: .15em;
+
+        @include media("<desktop") {
+            font-size: 1.2rem;
+        }
+    }
+
+    .text {
+        font-family: $title;
+        font-size: 1.875rem;
+        max-width: 40ch;
+        line-height: 1;
+        text-shadow: 2px 2px 10px rgba(0,0,0,.3);
+
+        @include media("<desktop") {
+            font-size: 1.3rem;
+        }
+    }
+</style>

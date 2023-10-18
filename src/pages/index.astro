@@ -1,16 +1,43 @@
 ---
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
+import '../assets/styles/reset.scss';
+ 
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/home', {
+  version: 'published',
+})
+ 
+const story = data.story
 ---
 
-<html lang="en">
+<html lang="pt-BR">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Fefa Cap — Tatuagem em Cicatriz</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Tatuagem Artística e Cobertura de CICATRIZES e ESTRIAS. Atendimento personalizado e exclusivo feito pela tatuadora Maria Fernanda Capeletti Bisetto, mais conhecida como Fefa. Para informações e agendamentos favor contatar o WhatsApp: 011 93337-6100 Instagram: @fefacap Tiktok: @fefacaptattoo">
+        <meta name="keywords" content="Tatuagem, cicatriz, estrias, tatuadora">
+        <meta property="og:locale" content="pt_BR">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Fefa Cap">
+        <meta property="og:description" content="Tatuagem Artística e Cobertura de CICATRIZES e ESTRIAS. Atendimento personalizado e exclusivo feito pela tatuadora Maria Fernanda Capeletti Bisetto, mais conhecida como Fefa. Para informações e agendamentos favor contatar o WhatsApp: 011 93337-6100 Instagram: @fefacap Tiktok: @fefacaptattoo">
+        <meta property="og:title" content="Fefa Cap">
+        <meta property="og:url" content="https://fefacap.com">
+        <meta property="og:image" content="https://fefacap.com/capa_fefacap.webp">
+        <meta property="og:updated_time" content="2023-10-18T21:30:49.720Z">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Fefa Cap">
+        <meta name="twitter:description" content="Tatuagem Artística e Cobertura de CICATRIZES e ESTRIAS. Atendimento personalizado e exclusivo feito pela tatuadora Maria Fernanda Capeletti Bisetto, mais conhecida como Fefa. Para informações e agendamentos favor contatar o WhatsApp: 011 93337-6100 Instagram: @fefacap Tiktok: @fefacaptattoo">
+        <meta name="twitter:image" content="https://fefacap.com/capa_fefacap.webp">
+        <meta name="twitter:image:alt" content="Fefa Cap">
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<StoryblokComponent blok={story.content} />
 	</body>
 </html>
